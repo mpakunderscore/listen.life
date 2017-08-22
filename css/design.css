@@ -1,0 +1,41 @@
+body {
+    background: linear-gradient(90deg, #ee53fa, #ffbe44, #4fb825, #17cdf2, #1794f2);
+    background-size: 1000% 100%;
+    animation: background-animation-v1 50s ease infinite;
+
+    /*animation: background-animation-v2 50s ease infinite;*/
+
+    /*background-color: #02b7ff;*/
+
+    /*background-color:  black;*/
+}
+
+@keyframes background-animation-v1 {
+    0% {background-position: 0 50%}
+    50% {background-position: 100% 50%}
+    100% {background-position: 0 50%}
+}
+
+@keyframes background-animation-v2 {
+    /*0% {background: linear-gradient(90deg, #ee53fa, #ffbe44)}*/
+    /*20% {background: linear-gradient(90deg, #ffbe44, #4fb825)}*/
+    /*40% {background: linear-gradient(90deg, #4fb825, #17cdf2)}*/
+    /*60% {background: linear-gradient(90deg, #17cdf2, #1794f2)}*/
+    /*80% {background: linear-gradient(90deg, #1794f2, #ee53fa)}*/
+    /*100% {background: linear-gradient(90deg, #1794f2, #ee53fa)}*/
+
+    0%   {background-color: #1794f2;}
+    10%  {background-color: #ff9b3e;}
+    35%  {background-color: #00dc4a;}
+    60% {background-color: #17cdf2;}
+    100% {background-color: #1794f2;}
+
+    /*90% {background: linear-gradient(90deg, #ee53fa, #ffbe44, #4fb825, #17cdf2, #1794f2)}*/
+}
+
+@keyframes background-animation-v3 {
+    0% {background: linear-gradient(90deg, #ee53fa, #ffbe44)}
+    25% {background: linear-gradient(90deg, #ffbe44, #4fb825)}
+    50% {background: linear-gradient(90deg, #4fb825, #17cdf2)}
+    100% {background: linear-gradient(90deg, #4fb825, #17cdf2)}
+}
