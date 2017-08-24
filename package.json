@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/mpakunderscore/listen.life#readme",
   "dependencies": {
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "request": "^2.81.0",
+    "youtube-dl": "^1.11.1"
   }
 }

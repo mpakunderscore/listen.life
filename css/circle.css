@@ -13,7 +13,7 @@
     /*-webkit-animation: pulsate 0.9s ease-out;*/
     /*-webkit-animation-iteration-count: infinite;*/
 
-    background-image: linear-gradient(260deg, rgba(255, 255, 255, 0.6) 10%, transparent 50%);
+    background-image: linear-gradient(260deg, rgba(255, 255, 255, 0.2) 10%, transparent 50%);
 
     cursor: pointer;
     z-index: 3;
