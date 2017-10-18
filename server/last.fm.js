@@ -1,7 +1,7 @@
 module.exports = {
 
-    foo: function () {
-        // whatever
+    tags: function () {
+        return tags;
     },
     bar: function () {
         // whatever
@@ -19,8 +19,8 @@ var getTrackTopTags_ =  'method=track.getTopTags&';
 var key = 'api_key=d6de1272194e70b5f0f25834eba24155&';
 var format = 'format=json';
 
-var tags = [];
-var tagTracks = {};
+let tags = [];
+let tagTracks = {};
 
 var playlist = [];
 
@@ -43,8 +43,10 @@ var playlist = [];
 
             // localStorage.setItem(getTopTags_, JSON.stringify(tags));
             console.log('getTopTags_ from web')
+            // console.log(tags)
 
             // fillTags();
+            // tags
             //TODO DO JOB HERE
 
         } else {

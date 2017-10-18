@@ -11,12 +11,17 @@ app.listen(port);
 
 var request = require('request');
 
-var youtubedl = require('youtube-dl');
+// var youtubedl = require('youtube-dl');
 
-var fs = require('fs');
+// var fs = require('fs');
 
 let lastfm = require('./server/last.fm');
 
 let youtube = require('./server/youtube');
+
+
+app.get('/tags', function (request, response) {
+    response.json(lastfm.tags());
+});
 
 console.log('Server listening on: ' + port);
