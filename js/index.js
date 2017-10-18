@@ -6,6 +6,8 @@ let delay = 200;
 
 let bias = 0;
 
+let quality = "large";
+
 function circle() {
 
     $("#circle").addClass("active");
@@ -68,7 +70,7 @@ function play(playlist) {
 
 
 
-    player.loadVideoById(playlist[0].url, 0, "large");
+    player.loadVideoById(playlist[0].url, 0, quality);
 
     $("#progress").addClass("show");
 
@@ -136,4 +138,16 @@ function background() {
         $("body").removeClass("experimental");
         $("#background").text("ON");
     }
+}
+
+function setQuality() {
+
+    // small, medium, large, hd720, hd1080, highres or default
+
+    if (quality === "large")
+        quality = "medium";
+
+    else quality = "large";
+
+    $("#quality").text(quality);
 }
