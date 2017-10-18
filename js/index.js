@@ -1,6 +1,10 @@
 fillTags();
 
+let _playlist = [];
+
 let delay = 200;
+
+let bias = 0;
 
 function circle() {
 
@@ -53,18 +57,21 @@ function playlist() {
 
 function play(playlist) {
 
+    _playlist = playlist;
+
     $("#player").css("display", "block");
 
     player.loadVideoById(playlist[0].url, 0, "large");
 
     $("#progress").addClass("show");
 
-    $("#track1").text(playlist[1].artist + " - " + playlist[1].title);
-    $("#track").text(playlist[0].artist + " - " + playlist[0].title);
+    for (let i = 0; i < 6; i++) {
+        $("#track" + i).text(_playlist[i].artist + " - " + _playlist[i].title);
+    }
 
     $("#controls").css("display", "block");
 
-    console.log("PLAY")
+    console.log("PLAY");
 
     let timer = setInterval(function() {
 
@@ -79,4 +86,45 @@ function play(playlist) {
         $("#done").css("width", playerTimeDifference + "%");
 
     }, 1000);
+}
+
+function nextVideo() {
+
+    console.log(_playlist[1]);
+
+    bias++;
+
+    for (let i = 0; i < 6; i++) {
+        $("#track" + i).text(_playlist[i+bias].artist + " - " + _playlist[i+bias].title);
+    }
+
+    $.get(
+        "/video",
+        {track: _playlist[1 + bias]},
+        function(video) {
+
+            // console.log(playlist[0].url)
+
+            player.loadVideoById(video, 0, "large");
+        }
+    );
+}
+
+
+
+
+
+
+function background() {
+
+    if (!$("body").hasClass("experimental")) {
+
+        $("body").addClass("experimental");
+        $("#background").text("OFF");
+
+    } else {
+
+        $("body").removeClass("experimental");
+        $("#background").text("ON");
+    }
 }

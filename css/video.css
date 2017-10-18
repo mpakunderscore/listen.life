@@ -25,12 +25,16 @@
     /*background-color: white;*/
 }
 
-#track {
+
+
+
+
+#track0 {
     color: ghostwhite;
 }
 
 .track {
-    padding: 20px;
+    padding: 5px;
     letter-spacing: normal;
     cursor: pointer;
 }
@@ -45,4 +49,5 @@
     width: 320px;
     height: 180px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    margin: 10px;
 }

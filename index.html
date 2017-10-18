@@ -38,7 +38,7 @@
 
     </head>
 
-    <body>
+    <body class="normal">
 
         <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/hHgVY0x8uUs?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>-->
 
@@ -46,6 +46,10 @@
             <!--<div>Moderat</div>-->
             <!--<div>Bad Kingdom</div>-->
         <!--</div>-->
+
+        <div id="settings">
+            <div>Background: <span id="background" class="button" onclick="background()">ON</span></div>
+        </div>
 
         <div id="circle-big" class="circle big">
             <div id="circle" class="circle small" onclick="circle()">
@@ -63,17 +67,21 @@
             <div id="player-circle">
 
                 <!--<div id="playlist">Some track here</div>-->
-                <div class="track" id="track1"></div>
+                <div class="track" id="track5"></div>
+                <div class="track" id="track4"></div>
+                <div class="track" id="track3"></div>
                 <div id="player"></div>
-                <div class="track" id="track"></div>
+                <div class="track" id="track0"></div>
+                <div class="track" id="track1"></div>
+                <div class="track" id="track2"></div>
                 <!--<div id="playlist-bottom"></div>-->
             </div>
         </div>
 
         <dic id="controls">
-            <i class="material-icons">skip_previous</i>
+            <i class="material-icons" onclick="prevVideo()">skip_previous</i>
             <i id="play" class="material-icons" onclick="pauseVideo()">pause</i>
-            <i class="material-icons">skip_next</i>
+            <i class="material-icons" onclick="nextVideo()">skip_next</i>
         </dic>
 
         <!--<a id="showVideo" onclick="showVideo()">Video</a>-->

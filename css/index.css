@@ -30,19 +30,7 @@ body {
     transform: translateX(-50%);
 }
 
-video {
-    z-index: 3;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 
-    display: none;
-}
-
-ul, div {
-    /*background-color: rgba(255, 255, 255, 0.1);*/
-}
 
 
 a {
@@ -227,5 +215,20 @@ a:hover {
 }
 
 #controls i:hover {
+    color: white;
+}
+
+#settings {
+    font-size: 12px;
+    position: fixed;
+    padding: 20px;
+    z-index: 3;
+}
+
+.button {
+    cursor: pointer;
+}
+
+.button:hover {
     color: white;
 }

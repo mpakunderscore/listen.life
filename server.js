@@ -28,4 +28,8 @@ app.get('/playlist', function (request, response) {
     response.json(lastfm.playlist(request.query.tags));
 });
 
+app.get('/video', function (request, response) {
+    response.json(lastfm.video(request.query.track));
+});
+
 console.log('Server listening on: ' + port);

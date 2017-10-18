@@ -22,6 +22,13 @@ module.exports = {
         console.log(tags);
 
         return getPlaylist(tags);
+    },
+
+    video: function (track) {
+
+        console.log(track);
+
+        return getYoutubeTrack(track);
     }
 };
 
@@ -198,8 +205,6 @@ function getTags(artist, track) {
 function getYoutubeTrack(track) {
 
     // console.log('/download link')
-
-
 
     var res = request('GET', 'https://www.youtube.com/results?search_query=' + track.artist + '+-+' + track.title);
 
