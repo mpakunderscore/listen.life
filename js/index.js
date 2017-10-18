@@ -10,7 +10,4 @@ function circle() {
             player.loadVideoById(playlist[0].url, 0, "large");
         }
     );
-
-
-    // player.playVideo();
 }

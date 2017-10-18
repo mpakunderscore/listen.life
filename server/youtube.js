@@ -1,12 +1,12 @@
-var youtubedl = require('youtube-dl');
-var fs = require('fs');
-var request = require('request');
+// var youtubedl = require('youtube-dl');
+// var fs = require('fs');
+let request = require('sync-request');
 
-var format = '.mp4';
+// var format = '.mp4';
 
-function getYoutubeTrack(track) {
+function getYoutubeTrack2(track) {
 
-    // console.log('/download link')
+    // console.log('/download link');
 
     request('https://www.youtube.com/results?search_query=' + track.artist + '+-+' + track.title, function (error, response, body) {
 

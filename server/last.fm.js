@@ -1,18 +1,36 @@
+// var $ = require("jquery");
+// var stringToDom = require('string-to-dom');
+
+// var stringToDom = require('string-to-dom');
+
+// const cheerio = require('cheerio');
+
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
+
+
+
+
 module.exports = {
 
     tags: function () {
+
         return tags;
+
     },
+
     playlist: function (tags) {
 
         console.log(tags);
 
-        // whatever
-        return [{title: "Some song", url: "Rb0UmrCXxVA"}];
+        return getPlaylist(tags);
     }
 };
 
-var request = require('request');
+var req = require('request');
+
+var request = require('sync-request');
 
 var url = 'https://ws.audioscrobbler.com/2.0/?';
 
@@ -28,12 +46,27 @@ let tagTracks = {};
 
 var playlist = [];
 
+function getPlaylist(tags) {
+
+    //TODO
+    if (tags === undefined) {
+        return "";
+    }
+
+    let storedTracks = tagTracks[tags[0]];
+    let tracks = getTagTracks(tags[0]);
+
+    tracks[0].url = getYoutubeTrack(tracks[0]);
+
+    return tracks;
+}
+
 //get tags
 function getTopTags() {
 
     // if (localStorage.getItem(getTopTags_) === null) {
 
-    request(url + getTopTags_ + key + format, function (error, response, body) {
+    req(url + getTopTags_ + key + format, function (error, response, body) {
 
         if (!error && response.statusCode == 200) {
 
@@ -88,63 +121,25 @@ function getTagTracks(tagTitle) {
 
     var tag = 'tag=' + tagTitle + '&';
 
-    if (localStorage.getItem(getTopTracks_ + tag) === null) {
+    let res = request('GET', url + getTopTracks_ + tag + key + format);
 
-        request(url + getTopTracks_ + tag + key + format, function (error, response, body) {
+    let body = JSON.parse(res.getBody('utf8'));
 
-            //TODO tagTitle & tag
+    var tracksArray = body.tracks.track;
 
-            if (!error && response.statusCode == 200) {
+    tagTracks[tagTitle] = [];
 
-                var tracksArray = JSON.parse(body).tracks.track;
+    for (var i = 0; i < tracksArray.length; i++) {
 
-                tagTracks[tagTitle] = [];
+        var title = tracksArray[i].name;
+        var artist = tracksArray[i].artist.name;
 
-                for (var i = 0; i < tracksArray.length; i++) {
+        tagTracks[tagTitle].push({artist: artist, title: title});
 
-                    var title = tracksArray[i].name;
-                    var artist = tracksArray[i].artist.name;
-
-                    tagTracks[tagTitle].push({artist: artist, title: title});
-
-
-                    // console.log(artist + ' ' + title + ' ' + [0]);
-
-                    getTags(artist, title);
-                }
-
-                // localStorage.setItem(getTopTracks_ + tag, JSON.stringify(tagTracks[tagTitle]));
-
-                return tagTracks[tagTitle];
-
-                // console.log('getTopTracks_ ' + tag + ' from web');
-            }
-        })
-
-    } else {
-
-        // console.log('getTopTracks_ ' + tag + ' from localStorage')
-        tagTracks[tagTitle] = JSON.parse(localStorage.getItem(getTopTracks_ + tag))
-
-        for (var i = 0; i < tagTracks[tagTitle].length; i++) {
-
-            var artist = tagTracks[tagTitle][i].artist;
-            var title = tagTracks[tagTitle][i].title;
-
-            // tagTracks[tagTitle].push({artist: artist, title: title})
-
-
-            // console.log(artist + ' ' + title);
-
-            // artist = 'artist=' + artist + '&';
-            // title = 'track=' + title +'&';
-
-
-            getTags(artist, title);
-        }
-
-        // console.log(tagTracks[tagTitle])
+        // getTags(artist, title);
     }
+
+    return tagTracks[tagTitle];
 }
 
 function getTags(artist, track) {
@@ -201,4 +196,50 @@ function getTags(artist, track) {
 
         checkTrack(artistTitle, trackTrack, trackTags);
     }
+}
+
+function getYoutubeTrack(track) {
+
+    // console.log('/download link')
+
+
+
+    var res = request('GET', 'https://www.youtube.com/results?search_query=' + track.artist + '+-+' + track.title);
+
+    let body = res.getBody('utf8');
+
+    // const $ = cheerio.load(res.getBody('utf8'))
+
+    // let dom = stringToDom(body);
+
+    const dom = new JSDOM(body);
+
+    let href = dom.window.document.querySelector("#results .item-section a").getAttribute("href");;
+
+    console.log(href);
+
+    // var href = $.find('#results').find('.item-section').find('a')[0].href;
+
+    return href.split("=")[1];
+}
+
+function getYoutubeTrack2(track) {
+
+    // console.log('/download link');
+
+    req('https://www.youtube.com/results?search_query=' + track.artist + '+-+' + track.title, function (error, response, body) {
+
+        if (!error && response.statusCode == 200) {
+
+            var href = $(body).find('#results').find('.item-section').find('a')[0].href;
+
+            // console.log(href);
+
+            // downloadMP4(track, 'https://www.youtube.com/watch?v=' + href.split('/watch?v=')[1]);
+
+        } else {
+
+            console.log(response.statusCode)
+        }
+    })
 }
