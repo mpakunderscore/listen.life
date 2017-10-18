@@ -1,4 +1,4 @@
-var tags = [{title: 'Rock', select: false},
+let tags = [{title: 'Rock', select: false},
     {title: 'Electronic', select: false},
     {title: 'Seen live', select: false},
     {title: 'Alternative', select: false},
@@ -9,8 +9,6 @@ var tags = [{title: 'Rock', select: false},
 $.get(
     "/tags",
     function(data) {
-
-        console.log(data)
         tags = data;
     }
 );
@@ -187,4 +185,26 @@ Array.prototype.contains = function(obj) {
     return false;
 }
 
+
+$(document).keydown(function(event){
+    var key = event.which;
+    switch(key) {
+        case 37:
+            // Key left.
+            break;
+        case 38:
+            // Key up.
+            if (tagIndex !== 0)
+                back();
+            break;
+        case 39:
+            // Key right.
+            break;
+        case 40:
+            // Key down.
+            if (tagIndex + 5 !== tags.length)
+                next();
+            break;
+    }
+});
 
