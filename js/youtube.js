@@ -17,10 +17,12 @@ function onYouTubeIframeAPIReady() {
         playerVars: {'autoplay': 0, 'controls': 0, 'showinfo': 0, 'rel': 0},
         events: {
             // 'onReady': onPlayerReady,
-            // 'onStateChange': onPlayerStateChange
+            'onStateChange': onPlayerStateChange
         }
     });
 }
+
+let playerTotalTime = 0;
 
 // 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {
@@ -32,12 +34,26 @@ function onPlayerReady(event) {
 //    the player should play for six seconds and then stop.
 var done = false;
 function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.PLAYING && !done) {
-        setTimeout(stopVideo, 6000);
-        done = true;
+
+    if (event.data == YT.PlayerState.PLAYING) {
+
+        playerTotalTime = player.getDuration();
+        // setTimeout(stopVideo, 6000);
+        // done = true;
     }
 }
 
 function stopVideo() {
     player.stopVideo();
+}
+
+function seek(event) {
+
+    let to = event.clientX / $(window).width();
+
+    to = to * playerTotalTime;
+
+    console.log(to)
+
+    player.seekTo(to, true);
 }

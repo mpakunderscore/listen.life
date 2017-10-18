@@ -9,9 +9,6 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
 
-
-
-
 module.exports = {
 
     tags: function () {
@@ -214,7 +211,7 @@ function getYoutubeTrack(track) {
 
     const dom = new JSDOM(body);
 
-    let href = dom.window.document.querySelector("#results .item-section a").getAttribute("href");;
+    let href = dom.window.document.querySelector("#results .item-section a").getAttribute("href");
 
     console.log(href);
 

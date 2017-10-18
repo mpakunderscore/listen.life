@@ -50,26 +50,22 @@
             </div>
         </div>
 
-        <div id="progress">
-            <div class="done"></div>
-        </div>
-
         <div id="tags"></div>
 
-        <!--<ul id="playlist"></ul>-->
-
-        <!--<div id="equalizer"></div>-->
-
-        <!--<video autoplay muted></video>-->
+        <div id="progress" onclick="seek(event)">
+            <div id="done"></div>
+        </div>
 
         <div id="youtube">
             <div id="player-circle">
+
+                <!--<div id="playlist">Some track here</div>-->
+                <div class="track" id="track1"></div>
                 <div id="player"></div>
-                <!--<iframe id="player"-->
-                        <!--src="https://www.youtube.com/embed/4b4YKHgtLOg?rel=0&controls=0&showinfo=0&version=3&enablejsapi=1"-->
-                        <!--frameborder="0">-->
-                <!--</iframe>-->
+                <div class="track" id="track"></div>
+                <!--<div id="playlist-bottom"></div>-->
             </div>
+
         </div>
 
         <!--<a id="showVideo" onclick="showVideo()">Video</a>-->

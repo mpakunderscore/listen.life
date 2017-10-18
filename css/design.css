@@ -3,7 +3,7 @@ body {
     /*background-size: 1000% 100%;*/
     /*animation: background-animation-v1 50s ease infinite;*/
 
-    /*animation: background-animation-v2 50s ease infinite;*/
+    animation: background-animation-v2 50s ease infinite;
 
     background-color: #02b7ff;
 
@@ -25,7 +25,7 @@ body {
     /*100% {background: linear-gradient(90deg, #1794f2, #ee53fa)}*/
 
     0%   {background-color: #1794f2;}
-    10%  {background-color: #ff9b3e;}
+    10%  {background-color: #02b7ff;}
     35%  {background-color: #00dc4a;}
     60% {background-color: #17cdf2;}
     100% {background-color: #1794f2;}
