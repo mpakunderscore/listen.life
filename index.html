@@ -9,6 +9,9 @@
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
         <!--<script src="./js/lib/jquery.min.js"></script>-->
 
         <!--<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>-->
@@ -65,8 +68,13 @@
                 <div class="track" id="track"></div>
                 <!--<div id="playlist-bottom"></div>-->
             </div>
-
         </div>
+
+        <dic id="controls">
+            <i class="material-icons">skip_previous</i>
+            <i id="play" class="material-icons" onclick="pauseVideo()">pause</i>
+            <i class="material-icons">skip_next</i>
+        </dic>
 
         <!--<a id="showVideo" onclick="showVideo()">Video</a>-->
 

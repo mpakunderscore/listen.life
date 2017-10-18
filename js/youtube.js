@@ -47,6 +47,18 @@ function stopVideo() {
     player.stopVideo();
 }
 
+function pauseVideo() {
+    player.pauseVideo();
+    $("#play").text("play_arrow");
+    $("#play").attr("onclick", "playVideo()")
+}
+
+function playVideo() {
+    player.playVideo();
+    $("#play").text("pause");
+    $("#play").attr("onclick", "pauseVideo()")
+}
+
 function seek(event) {
 
     let to = event.clientX / $(window).width();

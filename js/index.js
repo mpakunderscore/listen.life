@@ -62,6 +62,10 @@ function play(playlist) {
     $("#track1").text(playlist[1].artist + " - " + playlist[1].title);
     $("#track").text(playlist[0].artist + " - " + playlist[0].title);
 
+    $("#controls").css("display", "block");
+
+    console.log("PLAY")
+
     let timer = setInterval(function() {
 
         var playerCurrentTime = player.getCurrentTime();

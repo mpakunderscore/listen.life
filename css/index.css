@@ -83,7 +83,7 @@ a:hover {
 }
 
 #progress:hover {
-    height: 100px;
+    height: 70px;
 }
 
 /*#progress:hover .done {*/
@@ -205,4 +205,27 @@ a:hover {
 
     display: inline-block;
     background-color: rgba(255, 255, 255, 0.4);
+}
+
+#controls {
+
+    position: fixed;
+    /*height: 25%;*/
+    bottom: 100px;
+    width: 100%;
+    text-align: center;
+
+    color: rgba(255, 255, 255, 0.5);
+    /*background-color: red;*/
+
+    display: none;
+}
+
+#controls i {
+    font-size: 70px;
+    cursor: pointer;
+}
+
+#controls i:hover {
+    color: white;
 }
