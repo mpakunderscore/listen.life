@@ -24,4 +24,8 @@ app.get('/tags', function (request, response) {
     response.json(lastfm.tags());
 });
 
+app.get('/playlist', function (request, response) {
+    response.json(lastfm.playlist(request.query.tags));
+});
+
 console.log('Server listening on: ' + port);

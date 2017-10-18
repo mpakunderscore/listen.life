@@ -3,8 +3,12 @@ module.exports = {
     tags: function () {
         return tags;
     },
-    bar: function () {
+    playlist: function (tags) {
+
+        console.log(tags);
+
         // whatever
+        return [{title: "Some song", url: "Rb0UmrCXxVA"}];
     }
 };
 
@@ -25,7 +29,9 @@ let tagTracks = {};
 var playlist = [];
 
 //get tags
-// if (localStorage.getItem(getTopTags_) === null) {
+function getTopTags() {
+
+    // if (localStorage.getItem(getTopTags_) === null) {
 
     request(url + getTopTags_ + key + format, function (error, response, body) {
 
@@ -50,6 +56,7 @@ var playlist = [];
             //TODO DO JOB HERE
 
         } else {
+
             console.log(response.statusCode)
         }
     })
@@ -61,6 +68,10 @@ var playlist = [];
 
     // fillTags();
 // }
+
+}
+
+getTopTags();
 
 function getTracks() {
 
@@ -94,7 +105,7 @@ function getTagTracks(tagTitle) {
                     var title = tracksArray[i].name;
                     var artist = tracksArray[i].artist.name;
 
-                    tagTracks[tagTitle].push({artist: artist, title: title})
+                    tagTracks[tagTitle].push({artist: artist, title: title});
 
 
                     // console.log(artist + ' ' + title + ' ' + [0]);
@@ -102,8 +113,11 @@ function getTagTracks(tagTitle) {
                     getTags(artist, title);
                 }
 
-                localStorage.setItem(getTopTracks_ + tag, JSON.stringify(tagTracks[tagTitle]));
-                console.log('getTopTracks_ ' + tag + ' from web')
+                // localStorage.setItem(getTopTracks_ + tag, JSON.stringify(tagTracks[tagTitle]));
+
+                return tagTracks[tagTitle];
+
+                // console.log('getTopTracks_ ' + tag + ' from web');
             }
         })
 

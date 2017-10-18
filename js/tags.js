@@ -74,6 +74,11 @@ function next() {
 
 function back() {
 
+    if (tagIndex <= 0) {
+        tagIndex = 0;
+        return;
+    }
+
     $('#next').css('display', 'block');
 
     tagIndex--;
@@ -94,6 +99,10 @@ function back() {
 
     if (tagIndex === 0)
         $('#back').css('display', 'none');
+
+
+
+    console.log(tagIndex)
 }
 
 function select(tag, id) {
@@ -112,7 +121,7 @@ function select(tag, id) {
             } else {
 
                 tags[i].select = true;
-                $('#tag' + id).addClass('select')
+                $('#tag' + id).addClass('select');
                 selectedTags.push(tag);
             }
         }
