@@ -40,6 +40,9 @@ function onPlayerStateChange(event) {
         playerTotalTime = player.getDuration();
         // setTimeout(stopVideo, 6000);
         // done = true;
+
+        $("#circle").removeClass("active");
+        $("#circle-big").removeClass("active");
     }
 }
 

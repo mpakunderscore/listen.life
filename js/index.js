@@ -8,6 +8,8 @@ let bias = 0;
 
 function circle() {
 
+    $("#circle").addClass("active");
+
     if (selectedTags.length === 0) {
 
         let roll = Math.floor((Math.random() * 30) + 1);
@@ -43,6 +45,8 @@ function circle() {
 
 function playlist() {
 
+    $("#circle-big").addClass("active");
+
     $.get(
         "/playlist",
         {tags: selectedTags},
@@ -51,6 +55,7 @@ function playlist() {
             // console.log(playlist[0].url)
 
             play(playlist);
+
         }
     );
 }
@@ -60,6 +65,8 @@ function play(playlist) {
     _playlist = playlist;
 
     $("#player").css("display", "block");
+
+
 
     player.loadVideoById(playlist[0].url, 0, "large");
 
@@ -91,6 +98,8 @@ function play(playlist) {
 function nextVideo() {
 
     console.log(_playlist[1]);
+
+    $("#circle-big").addClass("active");
 
     $.get(
         "/video",

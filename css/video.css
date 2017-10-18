@@ -46,6 +46,7 @@
 }
 
 #player {
+    position: relative;
     pointer-events: none;
     display: none;
     width: 320px;
