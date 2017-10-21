@@ -1,19 +1,15 @@
-// var $ = require("jquery");
-// var stringToDom = require('string-to-dom');
-
-// var stringToDom = require('string-to-dom');
-
-// const cheerio = require('cheerio');
-
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
+
+var req = require('request');
+var request = require('sync-request');
 
 
 module.exports = {
 
     tags: function () {
 
-        return tags;
+        return shuffle(tags);
 
     },
 
@@ -32,14 +28,10 @@ module.exports = {
     }
 };
 
-var req = require('request');
-
-var request = require('sync-request');
-
 var url = 'https://ws.audioscrobbler.com/2.0/?';
 
 var getTopTags_ =       'method=tag.getTopTags&';
-var getTopTracks_ =     'method=tag.getTopTracks&';
+var getTopTracks_ =     'method=tag.getTopTracks&limit=500&';
 var getTrackTopTags_ =  'method=track.getTopTags&';
 
 var key = 'api_key=d6de1272194e70b5f0f25834eba24155&';
@@ -216,7 +208,12 @@ function getYoutubeTrack(track) {
 
     const dom = new JSDOM(body);
 
-    let href = dom.window.document.querySelector("#results .item-section a").getAttribute("href");
+    let link = dom.window.document.querySelector("#results .item-section a");
+
+    if (link === null)
+        return "";
+
+    let href = link.getAttribute("href");
 
     console.log(href);
 

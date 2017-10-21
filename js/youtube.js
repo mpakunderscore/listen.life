@@ -44,6 +44,10 @@ function onPlayerStateChange(event) {
         $("#circle").removeClass("active");
         $("#circle-big").removeClass("active");
     }
+
+    if (event.data === 0) {
+        nextVideo()
+    }
 }
 
 function stopVideo() {

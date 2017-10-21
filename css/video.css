@@ -1,6 +1,7 @@
 #youtube {
+
     position: fixed;
-    width: 35%;
+    width: 50%;
     height: 100%;
     /*background-color: red;*/
 
@@ -10,19 +11,55 @@
 
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+    /*align-items: center;*/
+    /*justify-content: space-around;*/
 
     background-color: rgba(255, 255, 255, 0.1);
 
+    transition: 2s width, 1s box-shadow;
 }
 
-#player-circle {
+#youtube:hover {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
 
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
+#iframe-container {
+    /*text-align: center;*/
+    /*position: fixed;*/
+    width: 100%;
+    /*text-align: center;*/
+
+    /*top: 30px;*/
+
+    /*background-color: red;*/
+}
+
+/*will be iframe onload*/
+#player {
+    position: relative;
+    pointer-events: none;
+
+    display: none;
+    margin: auto;
+    margin-top: 20px;
+
+    width: 320px;
+    height: 180px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    /*margin: 10px;*/
+}
+
+#playlist {
+
+    /*position: fixed;*/
+    /*left: 20px;*/
+    /*top: 20px;*/
+
+    padding: 20px;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*flex-direction: column;*/
+    /*text-align: center;*/
 
     /*background-color: white;*/
 }
@@ -45,12 +82,7 @@
     color: ghostwhite;
 }
 
-#player {
-    position: relative;
-    pointer-events: none;
-    display: none;
-    width: 320px;
-    height: 180px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
-    margin: 10px;
-}
+
+
+
+

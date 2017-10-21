@@ -4,7 +4,7 @@ body {
 }
 
 .normal {
-    animation: background-animation-v2 50s ease infinite;
+    /*animation: background-animation-v2 50s ease infinite;*/
 }
 
 .experimental {

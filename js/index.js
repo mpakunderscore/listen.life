@@ -68,7 +68,7 @@ function play(playlist) {
 
     $("#player").css("display", "block");
 
-
+    $("#youtube").css("width", "auto");
 
     player.loadVideoById(playlist[0].url, 0, quality);
 

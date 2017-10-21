@@ -106,41 +106,6 @@ a:hover {
 
 
 
-#playlist {
-    cursor: default;
-
-    /*display: table-cell;*/
-    /*vertical-align: middle;*/
-
-    z-index: 2;
-
-    padding: 0;
-    margin: 0;
-
-    position: fixed;
-    /*top: 50%;*/
-    /*transform: translateY(-50%);*/
-    bottom: 20px;
-    left: 25px;
-
-    /*background-color: rgba(255, 255, 255, 0.5);*/
-
-    color: rgba(255, 255, 255, 0.6);
-
-    list-style-type: none;
-    /*vertical-align: bottom;*/
-
-    /*padding-bottom: 5px;*/
-}
-
-#playlist li {
-    margin-top: 5px;
-}
-
-#playlist li:hover {
-    color: white;
-    cursor: pointer;
-}
 
 .tag {
     position: absolute;
@@ -222,7 +187,10 @@ a:hover {
     font-size: 12px;
     position: fixed;
     padding: 20px;
+    bottom: 0;
     z-index: 3;
+
+    color: rgba(248, 248, 255, 0.42);
 }
 
 .button {

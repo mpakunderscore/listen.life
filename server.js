@@ -1,3 +1,15 @@
+
+// var youtubedl = require('youtube-dl');
+
+// var fs = require('fs');
+
+let lastfm = require('./server/last.fm');
+
+let youtube = require('./server/youtube');
+
+let api = require('./server/api');
+
+
 let express = require('express');
 
 let app = express();
@@ -11,13 +23,6 @@ app.listen(port);
 
 var request = require('request');
 
-// var youtubedl = require('youtube-dl');
-
-// var fs = require('fs');
-
-let lastfm = require('./server/last.fm');
-
-let youtube = require('./server/youtube');
 
 
 app.get('/tags', function (request, response) {
