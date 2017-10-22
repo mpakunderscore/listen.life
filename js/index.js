@@ -4,8 +4,6 @@ let _playlist = [];
 
 let delay = 200;
 
-let bias = 0;
-
 let quality = "large";
 
 function circle() {
@@ -68,7 +66,7 @@ function play(playlist) {
 
     $("#player").css("display", "block");
 
-    $("#youtube").css("width", "370px");
+    $("#youtube").css("width", "360px");
 
     player.loadVideoById(playlist[0].url, 0, quality);
 
@@ -95,30 +93,6 @@ function play(playlist) {
     }, 1000);
 }
 
-function nextVideo() {
-
-    console.log(_playlist[1]);
-
-    $("#circle-big").addClass("active");
-
-    $.get(
-        "/video",
-        {track: _playlist[1 + bias]},
-        function(video) {
-
-            // console.log(playlist[0].url)
-
-            bias++;
-
-            for (let i = 0; i < 6; i++) {
-                $("#track" + i).text(_playlist[i+bias].artist + " - " + _playlist[i+bias].title);
-            }
-
-            player.loadVideoById(video, 0, "large");
-        }
-    );
-}
-
 function setSound() {
 
     if (player.getVolume() === 0) {
@@ -134,9 +108,6 @@ function setSound() {
 
 
 }
-
-
-
 
 function setBackground() {
 

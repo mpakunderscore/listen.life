@@ -36,8 +36,6 @@
 
         <script src="js/ga.js"></script>
 
-        <script src="js/playlist.js"></script>
-
         <!--<script src="js/spa.js"></script>-->
 
     </head>
@@ -52,8 +50,8 @@
         <!--</div>-->
 
         <div id="settings">
+            <div style="display: none">Background: <span id="background" class="button" onclick="setBackground()">OFF</span></div>
             <div>Sound: <span id="sound" class="button" onclick="setSound()">ON</span></div>
-            <div>Background: <span id="background" class="button" onclick="setBackground()">OFF</span></div>
             <div>Quality: <span id="quality" class="button" onclick="setQuality()">large</span></div>
         </div>
 
@@ -76,22 +74,14 @@
             </div>
 
             <div id="playlist">
-
-                <div class="track" id="track0"></div>
-                <div class="track" id="track1"></div>
-                <div class="track" id="track2"></div>
-                <div class="track" id="track3"></div>
-                <div class="track" id="track4"></div>
-                <div class="track" id="track5"></div>
-
             </div>
         </div>
 
-        <dic id="controls">
+        <div id="controls">
             <i class="material-icons" onclick="prevVideo()">skip_previous</i>
             <i id="play" class="material-icons" onclick="pauseVideo()">pause</i>
             <i class="material-icons" onclick="nextVideo()">skip_next</i>
-        </dic>
+        </div>
 
         <!--<a id="showVideo" onclick="showVideo()">Video</a>-->
 
@@ -105,6 +95,8 @@
         <script src="js/index.js"></script>
 
         <script src="js/youtube.js"></script>
+
+        <script src="js/playlist.js"></script>
 
     </body>
 
