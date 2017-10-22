@@ -2,6 +2,7 @@
 
     position: fixed;
     width: 50%;
+    min-width: 370px;
     height: 100%;
     /*background-color: red;*/
 
@@ -56,6 +57,7 @@
     /*top: 20px;*/
 
     padding: 20px;
+    padding-top: 15px;
     /*display: flex;*/
     /*justify-content: center;*/
     /*flex-direction: column;*/

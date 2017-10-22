@@ -16,7 +16,7 @@ function circle() {
 
         let roll = Math.floor((Math.random() * 30) + 1);
 
-        console.log(roll)
+        console.log(roll);
 
         for (let i = 0; i < roll; i++) {
 
@@ -68,17 +68,15 @@ function play(playlist) {
 
     $("#player").css("display", "block");
 
-    $("#youtube").css("width", "auto");
+    $("#youtube").css("width", "370px");
 
     player.loadVideoById(playlist[0].url, 0, quality);
 
     $("#progress").addClass("show");
 
-    for (let i = 0; i < 6; i++) {
-        $("#track" + i).text(_playlist[i].artist + " - " + _playlist[i].title);
-    }
-
     $("#controls").css("display", "block");
+
+    fillPlaylist(_playlist);
 
     console.log("PLAY");
 
@@ -121,22 +119,36 @@ function nextVideo() {
     );
 }
 
+function setSound() {
+
+    if (player.getVolume() === 0) {
+
+        player.setVolume(100);
+        $("#sound").text("ON");
+
+    } else {
+
+        $("#sound").text("OFF");
+        player.setVolume(0);
+    }
+
+
+}
 
 
 
 
-
-function background() {
+function setBackground() {
 
     if (!$("body").hasClass("experimental")) {
 
         $("body").addClass("experimental");
-        $("#background").text("OFF");
+        $("#background").text("ON");
 
     } else {
 
         $("body").removeClass("experimental");
-        $("#background").text("ON");
+        $("#background").text("OFF");
     }
 }
 
