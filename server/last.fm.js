@@ -1,38 +1,84 @@
 const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+const {JSDOM} = jsdom;
 
 var req = require('request');
 var request = require('sync-request');
 
+let database = require('./database.js');
 
-module.exports = {
 
-    tags: function () {
+module.exports.tags = function () {
 
-        return shuffle(tags);
+    return shuffle(tags);
+};
 
-    },
+module.exports.playlist = function (tags) {
 
-    playlist: function (tags) {
+    console.log(tags);
 
-        console.log(tags);
+    return getTagsTracks(tags);
+};
 
-        return getPlaylist(tags);
-    },
+module.exports.video = function (track) {
 
-    video: function (track) {
+    console.log(track);
 
-        console.log(track);
+    return getYoutubeTrack(track);
+};
 
-        return getYoutubeTrack(track);
-    }
+module.exports.getTrackTags = function (track) {
+
+    let artist = 'artist=' + track.artist + '&';
+    let title = 'track=' + track.title + '&';
+
+    let requestUrl = url + getTrackTopTags_ + artist + title + key + format;
+
+    req(requestUrl, function (error, response, body) {
+
+        let trackTags = [];
+
+        if (!error && response.statusCode == 200) {
+
+            if (JSON.parse(body).toptags === undefined) {
+
+
+                // localStorage.setItem(getTrackTopTags_ + artist + track, JSON.stringify(trackTags));
+                return;
+            }
+
+            let tagsArray = JSON.parse(body).toptags.tag; // Show the HTML for the Google homepage.
+
+            for (let i = 0; i < tagsArray.length; i++) {
+
+                let title = tagsArray[i].name;
+                let count = tagsArray[i].count;
+
+                console.log(title + ' - ' + count);
+
+                trackTags.push({title: title, count: count})
+            }
+
+            // console.log('getTrackTopTags_ ' + artist + ' - ' + track + ' from web')
+            // localStorage.setItem(getTrackTopTags_ + artist + track, JSON.stringify(trackTags));
+
+            // checkTrack(artistTitle, trackTrack, trackTags);
+
+            track["tags"] = JSON.stringify(trackTags);
+
+            database.updateTrack(track)
+
+        } else {
+
+            // console.log(response.statusCode)
+        }
+    })
 };
 
 var url = 'https://ws.audioscrobbler.com/2.0/?';
 
-var getTopTags_ =       'method=tag.getTopTags&';
-var getTopTracks_ =     'method=tag.getTopTracks&limit=500&';
-var getTrackTopTags_ =  'method=track.getTopTags&';
+var getTopTags_ = 'method=tag.getTopTags&';
+var getTopTracks_ = 'method=tag.getTopTracks&limit=500&';
+var getTrackTopTags_ = 'method=track.getTopTags&';
 
 var key = 'api_key=d6de1272194e70b5f0f25834eba24155&';
 var format = 'format=json';
@@ -40,9 +86,9 @@ var format = 'format=json';
 let tags = [];
 let tagTracks = {};
 
-var playlist = [];
+// var playlist = [];
 
-function getPlaylist(tags) {
+function getTagsTracks(tags) {
 
     //TODO
     if (tags === undefined) {
@@ -50,7 +96,7 @@ function getPlaylist(tags) {
     }
 
     let storedTracks = tagTracks[tags[0]];
-    let tracks = getTagTracks(tags[0]);
+    let tracks = getTagTopTracks(tags[0]);
 
     tracks[0].url = getYoutubeTrack(tracks[0]);
 
@@ -89,31 +135,22 @@ function getTopTags() {
             console.log(response.statusCode)
         }
     })
-
-// } else {
-
-    // console.log('getTopTags_ from localStorage')
-    // tags = JSON.parse(localStorage.getItem(getTopTags_))
-
-    // fillTags();
-// }
-
 }
 
-getTopTags();
+// getTopTags();
 
 function getTracks() {
 
-    playlist = [];
+    // playlist = [];
     // $('#playlist').text('');
 
     for (var i = 0; i < selectedTags.length; i++) {
 
-        getTagTracks(selectedTags[i])
+        getTagTopTracks(selectedTags[i])
     }
 }
 
-function getTagTracks(tagTitle) {
+function getTagTopTracks(tagTitle) {
 
     var tag = 'tag=' + tagTitle + '&';
 
@@ -135,7 +172,7 @@ function getTagTracks(tagTitle) {
         // getTags(artist, title);
     }
 
-    return tagTracks[tagTitle];
+    return tracksArray;
 }
 
 function getTags(artist, track) {
@@ -146,52 +183,42 @@ function getTags(artist, track) {
     // console.log('getTags: ' + artist + ' - ' + track)
 
     artist = 'artist=' + artist + '&';
-    track = 'track=' + track +'&';
+    track = 'track=' + track + '&';
 
-    if (localStorage.getItem(getTrackTopTags_ + artist + track) === null) {
+    request(url + getTrackTopTags_ + artist + track + key + format, function (error, response, body) {
 
-        // console.log(url + encodeURIComponent(getTrackTopTags_ + artist + track + key + format))
+        var trackTags = [];
 
-        request(url + getTrackTopTags_ + artist + track + key + format, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
 
-            var trackTags = [];
+            if (JSON.parse(body).toptags === undefined) {
 
-            if (!error && response.statusCode == 200) {
 
-                if (JSON.parse(body).toptags === undefined) {
-                    localStorage.setItem(getTrackTopTags_ + artist + track, JSON.stringify(trackTags));
-                    return;
-                }
-
-                var tagsArray = JSON.parse(body).toptags.tag; // Show the HTML for the Google homepage.
-
-                for (var i = 0; i < tagsArray.length; i++) {
-
-                    var title = tagsArray[i].name;
-                    var count = tagsArray[i].count;
-
-                    // console.log(title + ' - ' + count);
-                    // name = name.charAt(0).toUpperCase() + name.slice(1);
-
-                    trackTags.push({title: title, count: count})
-                }
-
-                // console.log('getTrackTopTags_ ' + artist + ' - ' + track + ' from web')
-                localStorage.setItem(getTrackTopTags_ + artist + track, JSON.stringify(trackTags));
-
-                checkTrack(artistTitle, trackTrack, trackTags);
-
-            } else {
-                console.log(response.statusCode)
+                // localStorage.setItem(getTrackTopTags_ + artist + track, JSON.stringify(trackTags));
+                return;
             }
-        })
 
-    } else {
+            var tagsArray = JSON.parse(body).toptags.tag; // Show the HTML for the Google homepage.
 
-        var trackTags = JSON.parse(localStorage.getItem(getTrackTopTags_ + artist + track))
+            for (var i = 0; i < tagsArray.length; i++) {
 
-        checkTrack(artistTitle, trackTrack, trackTags);
-    }
+                var title = tagsArray[i].name;
+                var count = tagsArray[i].count;
+
+                console.log(title + ' - ' + count);
+
+                trackTags.push({title: title, count: count})
+            }
+
+            // console.log('getTrackTopTags_ ' + artist + ' - ' + track + ' from web')
+            // localStorage.setItem(getTrackTopTags_ + artist + track, JSON.stringify(trackTags));
+
+            // checkTrack(artistTitle, trackTrack, trackTags);
+
+        } else {
+            console.log(response.statusCode)
+        }
+    })
 }
 
 function getYoutubeTrack(track) {

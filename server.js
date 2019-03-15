@@ -7,12 +7,13 @@ let lastfm = require('./server/last.fm');
 
 let youtube = require('./server/youtube');
 
-let api = require('./server/api');
-
+let database = require('./server/database');
 
 let express = require('express');
 
 let app = express();
+
+let api = require('./server/api')(app);
 
 let port = process.env.PORT || 7070;
 
@@ -21,20 +22,8 @@ app.use('/', express.static(__dirname));
 
 app.listen(port);
 
-var request = require('request');
-
-
-
-app.get('/tags', function (request, response) {
-    response.json(lastfm.tags());
-});
-
-app.get('/playlist', function (request, response) {
-    response.json(lastfm.playlist(request.query.tags));
-});
-
-app.get('/video', function (request, response) {
-    response.json(lastfm.video(request.query.track));
-});
+database.buildTracks();
 
 console.log('Server listening on: ' + port);
+
+

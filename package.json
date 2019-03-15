@@ -23,8 +23,11 @@
     "jQuery": "^1.7.4",
     "jquery": "^3.2.1",
     "jsdom": "^11.3.0",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
     "request": "^2.81.0",
     "request-promise": "^4.2.2",
+    "sequelize": "^4.20.3",
     "string-to-dom": "^0.1.5",
     "sync-request": "^4.1.0",
     "youtube-dl": "^1.11.1"

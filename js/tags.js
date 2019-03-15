@@ -1,15 +1,18 @@
-let tags = [{title: 'Rock', select: false},
-    {title: 'Electronic', select: false},
-    {title: 'Seen live', select: false},
-    {title: 'Alternative', select: false},
-    {title: 'Indie', select: false},
-    {title: 'Pop', select: false},
-    {title: 'Female vocalists', select: false}];
+// let tags = [{title: 'Rock', select: false},
+//     {title: 'Electronic', select: false},
+//     {title: 'Seen live', select: false},
+//     {title: 'Alternative', select: false},
+//     {title: 'Indie', select: false},
+//     {title: 'Pop', select: false},
+//     {title: 'Female vocalists', select: false}];
+
+let tags = [{title: 'Loading', select: false}];
 
 $.get(
     "/tags",
     function(data) {
         tags = data;
+        fillTags();
     }
 );
 

@@ -1,5 +1,3 @@
-fillTags();
-
 let _playlist = [];
 
 let delay = 200;
