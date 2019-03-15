@@ -7,7 +7,7 @@ let lastfm = require('./server/last.fm');
 
 let youtube = require('./server/youtube');
 
-let database = require('./server/database');
+// let database = require('./server/database');
 
 let express = require('express');
 
@@ -22,7 +22,7 @@ app.use('/', express.static(__dirname));
 
 app.listen(port);
 
-database.buildTracks();
+// database.buildTracks();
 
 console.log('Server listening on: ' + port);
 
