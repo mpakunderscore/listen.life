@@ -3,6 +3,8 @@
 
 // var fs = require('fs');
 
+require('dotenv').config()
+
 let lastfm = require('./server/last.fm');
 
 let youtube = require('./server/youtube');

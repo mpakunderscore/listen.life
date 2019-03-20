@@ -10,6 +10,14 @@ module.exports = function (app) {
         response.json(database.tags());
     });
 
+    app.get('/tracks', function (request, response) {
+        response.json(database.tracks());
+    });
+
+    app.get('/tracks/get', function (request, response) {
+        response.json(database.getAllTracks());
+    });
+
     app.get('/playlist', function (request, response) {
         response.json(lastfm.playlist(request.query.tags));
     });

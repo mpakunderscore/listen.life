@@ -1,6 +1,6 @@
 let lastfm = require('./last.fm');
 
-let Track = require('./database');
+let database = require('./database');
 
 module.exports.scan = function () {
 
@@ -16,7 +16,7 @@ module.exports.scan = function () {
 
             // lastfm.tags();
 
-            Track.create({
+            database.Track.create({
                 mbid: lastfmTracks[i].mbid,
                 title: lastfmTracks[i].name,
                 artist: lastfmTracks[i].artist.name,

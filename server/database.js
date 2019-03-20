@@ -18,10 +18,10 @@ let set = {
     }
 };
 
-let sequelize = new Sequelize('listen', 'pavelkuzmin', '', set);
+let sequelize = new Sequelize('pavelkuzmin', 'pavelkuzmin', '', set);
 // let sequelize = new Sequelize(process.env.DATABASE_URL);
 
-let Track = sequelize.define('track', {
+module.exports.Track = sequelize.define('track', {
     mbid: {type: Sequelize.STRING, primaryKey: true},
     title: Sequelize.STRING,
     artist: Sequelize.STRING,
@@ -47,7 +47,7 @@ let Tag = sequelize.define('tag', {
 
 let drop = false;
 if (drop) {
-    Track.sync({force: true}).then(() => {});
+    exports.Track.sync({force: true}).then(() => {});
     Artist.sync({force: true}).then(() => {});
     Album.sync({force: true}).then(() => {});
     Tag.sync({force: true}).then(() => {});
@@ -150,6 +150,21 @@ module.exports.updateTrack = function (track) {
     Track.update(track, { where: { mbid: track.mbid } }).then((result) => {
 
         tracks[track.mbid] = track;
+    });
+};
+
+module.exports.getAllTracks = function () {
+
+    module.exports.Track.findAll().then(dbTracks => {
+
+        dbTracks.forEach((track) => {
+
+            let plainTrack = track.get({
+                plain: true
+            });
+
+            tracks[plainTrack.mbid] = plainTrack;
+        });
     });
 };
 
