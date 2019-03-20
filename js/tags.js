@@ -32,7 +32,7 @@ function fillTags() {
             .css('transform', 'rotate(' + incline + 'deg)')
             .css('display', 'none'));
 
-    for (var i = 1; i < 6; i++) {
+    for (var i = 1; i < tags.length; i++) {
         $('#tags')
             .append($('<div>' + tags[i - 1].title + '</div>')
                 .attr('onclick', 'select("' + tags[i - 1].title + '", "' + i + '")')
@@ -55,7 +55,7 @@ function next() {
 
     tagIndex++;
 
-    for (var i = 1; i < 6; i++) {
+    for (var i = 1; i < tags.length; i++) {
         $('#tag' + i).text(tags[i - 1 + tagIndex].title)
             // .append($('<div>' + tags[i - 1].title + '</div>')
                 .attr('onclick', 'select("' + tags[i - 1 + tagIndex].title + '", "' + i + '")');

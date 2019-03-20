@@ -1,3 +1,6 @@
+let lastfm = require('./last.fm');
+
+let Track = require('./database');
 
 module.exports.scan = function () {
 
@@ -5,11 +8,13 @@ module.exports.scan = function () {
 
     let lastfmTracks = lastfm.playlist(["Electronic"]);
 
+    let tracks = {};
+
     for (let i = 0; i < lastfmTracks.length; i++) {
 
         if (lastfmTracks[i].mbid !== "" && !tracks.hasOwnProperty(lastfmTracks[i].mbid)) {
 
-            lastfm.tags();
+            // lastfm.tags();
 
             Track.create({
                 mbid: lastfmTracks[i].mbid,

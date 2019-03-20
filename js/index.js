@@ -48,7 +48,7 @@ function playlist() {
     $.get(
         "/playlist",
         {tags: selectedTags},
-        function(playlist) {
+        function (playlist) {
 
             // console.log(playlist[0].url)
 

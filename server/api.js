@@ -1,5 +1,9 @@
 let database = require('./database');
 
+let lastfm = require('./last.fm');
+
+let core = require('./core');
+
 module.exports = function (app) {
 
     app.get('/tags', function (request, response) {
@@ -15,7 +19,7 @@ module.exports = function (app) {
     });
 
     app.get('/scan', function (request, response) {
-        database.scan();
+        core.scan();
         response.json(true);
     });
 
