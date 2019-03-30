@@ -22,10 +22,14 @@ let port = process.env.PORT || 7070;
 //STATIC WEB
 app.use('/', express.static(__dirname));
 
+app.get('/api', function (requst, response) {
+    response.sendfile('api.html');
+});
+
 app.listen(port);
 
 // database.buildTracks();
 
-console.log('Server listening on: ' + port);
+console.log('server listening on: ' + port);
 
 

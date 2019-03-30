@@ -32,7 +32,7 @@ models.Tag = sequelize.define('tag', {
     wiki: Sequelize.TEXT,
 });
 
-let drop = true;
+let drop = false;
 if (drop) {
     models.Track.sync({force: true}).then(() => {});
     models.Artist.sync({force: true}).then(() => {});
@@ -55,7 +55,7 @@ exports.tags = function () {
 //buildTracks tracks array
 exports.buildTracks = function () {
 
-    Track.findAll().then(dbTracks => {
+    exports.models.Track.findAll().then(dbTracks => {
 
         dbTracks.forEach((track) => {
 
@@ -66,8 +66,9 @@ exports.buildTracks = function () {
             tracks[plainTrack.mbid] = plainTrack;
         });
 
-        console.log("buildTracks db: " + Object.keys(tracks).length);
+        console.log("buildTracks db: " + tracks);
 
+        //fill tags to track object
         buildTags();
     });
 };
@@ -84,36 +85,42 @@ let buildTags = function () {
 
         let track = tracks[mbid];
 
-        // lastfm.getTrackTags(track);
+        lastfm.getTrackTags(track).then((value) => {
 
-        let tags = JSON.parse(track.tags);
+            console.log(value)
 
-        // console.log(tags.length);
+            let tags = JSON.parse(track.tags);
 
-        for (let i = 0; i < tags.length; i++) {
+            // console.log(tags.length);
 
-            let title = tags[i].title;
+            for (let i = 0; i < tags.length; i++) {
 
-            title = title.charAt(0).toUpperCase() + title.slice(1);
+                let title = tags[i].title;
 
-            if (globalTags.hasOwnProperty(title)) {
 
-                globalTags[title] = globalTags[title] + 1;
+                title = title.charAt(0).toUpperCase() + title.slice(1);
 
-            } else {
+                if (globalTags.hasOwnProperty(title)) {
 
-                globalTags[title] = 1;
+                    globalTags[title] = globalTags[title] + 1;
+
+                } else {
+
+                    globalTags[title] = 1;
+                }
             }
-        }
+        });
+
+
     }
 
     // let result = Object.keys(globalTags).map(function(key) {
     //     return [Number(key), globalTags[key]];
     // });
 
-    var sortable = [];
-    for (var vehicle in globalTags) {
-        sortable.push({title: vehicle, count: globalTags[vehicle], active: false});
+    let sortable = [];
+    for (let gTag in globalTags) {
+        sortable.push({title: gTag, count: globalTags[gTag], active: false});
     }
 
     sortable.sort(function(a, b) {
@@ -125,19 +132,27 @@ let buildTags = function () {
     console.log("buildTags db: " + Object.keys(tags).length);
 };
 
-
+//update tracks data from last.fm
 
 exports.updateTrack = function (track) {
 
-    Track.update(track, { where: { mbid: track.mbid } }).then((result) => {
+    exports.models.Track.update({ tags: track.tags }, { where: { mbid: track.mbid } }).then((result) => {
+
+        console.log(result)
 
         tracks[track.mbid] = track;
+
+        // console.log("tracks updated: " + Object.keys(track.tags).length);
+    }).catch(error => {
+        console.log(error);
     });
 };
 
+//load all tracks in storage
+
 exports.getAllTracks = function () {
 
-    exports.Track.findAll().then(dbTracks => {
+    exports.models.Track.findAll().then(dbTracks => {
 
         dbTracks.forEach((track) => {
 
@@ -147,6 +162,8 @@ exports.getAllTracks = function () {
 
             tracks[plainTrack.mbid] = plainTrack;
         });
+
+        // console.log(Object.keys(tracks).length)
     });
 };
 

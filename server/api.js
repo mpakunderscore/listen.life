@@ -10,12 +10,20 @@ module.exports = function (app) {
         response.json(database.tags());
     });
 
+    app.get('/tags/get', function (request, response) {
+        // response.json(database.tags());
+    });
+
     app.get('/tracks', function (request, response) {
         response.json(database.tracks());
     });
 
     app.get('/tracks/get', function (request, response) {
         response.json(database.getAllTracks());
+    });
+
+    app.get('/tracks/build', function (request, response) {
+        response.json(database.buildTracks());
     });
 
     app.get('/playlist', function (request, response) {

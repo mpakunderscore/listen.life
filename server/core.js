@@ -16,7 +16,7 @@ module.exports.scan = function () {
 
             // lastfm.tags();
 
-            database.Track.create({
+            database.models.Track.create({
                 mbid: lastfmTracks[i].mbid,
                 title: lastfmTracks[i].name,
                 artist: lastfmTracks[i].artist.name,
@@ -29,17 +29,17 @@ module.exports.scan = function () {
         // lastfmTracks[i].artist.duration,
     }
 };
-
-module.exports.expand = function () {
-
-    // let tracks = this.tracks();
-
-    for (let mbid in tracks) {
-
-        // console.log(tracks.length + " " + i);
-
-        let track = tracks[mbid];
-
-        lastfm.getTrackTags(track);
-    }
-};
+//
+// module.exports.expand = function () {
+//
+//     // let tracks = this.tracks();
+//
+//     for (let mbid in tracks) {
+//
+//         // console.log(tracks.length + " " + i);
+//
+//         let track = tracks[mbid];
+//
+//         lastfm.getTrackTags(track);
+//     }
+// };

@@ -33,6 +33,11 @@ module.exports.getTrackTags = function (track) {
 
     let requestUrl = url + getTrackTopTags_ + artist + title + key + format;
 
+    return new Promise(resolve => {
+
+    })
+
+
     req(requestUrl, function (error, response, body) {
 
         let trackTags = [];
@@ -65,11 +70,15 @@ module.exports.getTrackTags = function (track) {
 
             track["tags"] = JSON.stringify(trackTags);
 
-            database.updateTrack(track)
+            // database.updateTrack(track);
+
+            return database.updateTrack(track);
 
         } else {
 
-            // console.log(response.statusCode)
+            console.log(response)
+
+            return {error: 'tags null'}
         }
     })
 };
