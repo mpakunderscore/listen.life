@@ -1,27 +1,14 @@
-
-
 let Sequelize = require('sequelize');
 
 // let network = require('./network.js');
 
 let lastfm = require('./last.fm.js');
 
-let set = {
+let sequelize = new Sequelize(process.env.DATABASE_URL);
 
-    host: 'localhost',
-    dialect: 'postgres',
+let models = exports.models = {};
 
-    pool: {
-        max: 5,
-        min: 0,
-        idle: 10000
-    }
-};
-
-let sequelize = new Sequelize('pavelkuzmin', 'pavelkuzmin', '', set);
-// let sequelize = new Sequelize(process.env.DATABASE_URL);
-
-module.exports.Track = sequelize.define('track', {
+models.Track = sequelize.define('track', {
     mbid: {type: Sequelize.STRING, primaryKey: true},
     title: Sequelize.STRING,
     artist: Sequelize.STRING,
@@ -30,48 +17,43 @@ module.exports.Track = sequelize.define('track', {
     youtube: Sequelize.STRING,
 });
 
-let Artist = sequelize.define('artist', {
+models.Artist = sequelize.define('artist', {
     mbid: {type: Sequelize.STRING, primaryKey: true},
     title: Sequelize.STRING,
     wiki: Sequelize.STRING,
 });
 
-let Album = sequelize.define('album', {
+models.Album = sequelize.define('album', {
     title: Sequelize.STRING,
 });
 
-let Tag = sequelize.define('tag', {
+models.Tag = sequelize.define('tag', {
     title: Sequelize.STRING,
     wiki: Sequelize.TEXT,
 });
 
-let drop = false;
+let drop = true;
 if (drop) {
-    exports.Track.sync({force: true}).then(() => {});
-    Artist.sync({force: true}).then(() => {});
-    Album.sync({force: true}).then(() => {});
-    Tag.sync({force: true}).then(() => {});
+    models.Track.sync({force: true}).then(() => {});
+    models.Artist.sync({force: true}).then(() => {});
+    models.Album.sync({force: true}).then(() => {});
+    models.Tag.sync({force: true}).then(() => {});
 }
-
-
-
 
 let tags = {};
 
 let tracks = {};
 
-module.exports.tracks = function () {
+exports.tracks = function () {
     return tracks;
 };
 
-module.exports.tags = function () {
+exports.tags = function () {
     return tags;
 };
 
-
-
 //buildTracks tracks array
-module.exports.buildTracks = function () {
+exports.buildTracks = function () {
 
     Track.findAll().then(dbTracks => {
 
@@ -145,7 +127,7 @@ let buildTags = function () {
 
 
 
-module.exports.updateTrack = function (track) {
+exports.updateTrack = function (track) {
 
     Track.update(track, { where: { mbid: track.mbid } }).then((result) => {
 
@@ -153,9 +135,9 @@ module.exports.updateTrack = function (track) {
     });
 };
 
-module.exports.getAllTracks = function () {
+exports.getAllTracks = function () {
 
-    module.exports.Track.findAll().then(dbTracks => {
+    exports.Track.findAll().then(dbTracks => {
 
         dbTracks.forEach((track) => {
 
