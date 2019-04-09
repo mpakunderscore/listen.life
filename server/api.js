@@ -6,24 +6,13 @@ let core = require('./core');
 
 module.exports = function (app) {
 
-    app.get('/tags', function (request, response) {
-        response.json(database.tags());
-    });
-
-    app.get('/tags/get', function (request, response) {
-        // response.json(database.tags());
-    });
 
     app.get('/tracks', function (request, response) {
         response.json(database.tracks());
     });
 
-    app.get('/tracks/get', function (request, response) {
-        response.json(database.getAllTracks());
-    });
-
-    app.get('/tracks/build', function (request, response) {
-        response.json(database.buildTracks());
+    app.get('/tags', function (request, response) {
+        response.json(database.tags());
     });
 
     app.get('/playlist', function (request, response) {
@@ -39,18 +28,9 @@ module.exports = function (app) {
         response.json(true);
     });
 
-    app.get('/expand', function (request, response) {
-        database.expand();
-        response.json(true);
-    });
-
-    app.get('/buildTags', function (request, response) {
+    app.get('/tags/build', function (request, response) {
         database.buildTags();
         response.json(true);
-    });
-
-    app.get('/tracks', function (request, response) {
-        response.json(database.tracks());
     });
 };
 

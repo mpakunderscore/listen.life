@@ -33,11 +33,6 @@ module.exports.getTrackTags = function (track) {
 
     let requestUrl = url + getTrackTopTags_ + artist + title + key + format;
 
-    return new Promise(resolve => {
-
-    })
-
-
     req(requestUrl, function (error, response, body) {
 
         let trackTags = [];
@@ -46,8 +41,9 @@ module.exports.getTrackTags = function (track) {
 
             if (JSON.parse(body).toptags === undefined) {
 
+                console.log('no tags')
+                console.log(JSON.parse(body))
 
-                // localStorage.setItem(getTrackTopTags_ + artist + track, JSON.stringify(trackTags));
                 return;
             }
 
@@ -70,15 +66,16 @@ module.exports.getTrackTags = function (track) {
 
             track["tags"] = JSON.stringify(trackTags);
 
-            // database.updateTrack(track);
+            database.updateTrack(track)
 
-            return database.updateTrack(track);
+            return new Promise(resolve => {
+                return track;
+            });
 
         } else {
 
+            console.log(error)
             console.log(response)
-
-            return {error: 'tags null'}
         }
     })
 };

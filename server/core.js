@@ -29,17 +29,3 @@ module.exports.scan = function () {
         // lastfmTracks[i].artist.duration,
     }
 };
-//
-// module.exports.expand = function () {
-//
-//     // let tracks = this.tracks();
-//
-//     for (let mbid in tracks) {
-//
-//         // console.log(tracks.length + " " + i);
-//
-//         let track = tracks[mbid];
-//
-//         lastfm.getTrackTags(track);
-//     }
-// };
