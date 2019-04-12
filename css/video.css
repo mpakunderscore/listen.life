@@ -91,7 +91,7 @@
     overflow: hidden;
     white-space: nowrap;
 
-    background-color: red;
+    /*background-color: red;*/
 }
 
 .track:hover {

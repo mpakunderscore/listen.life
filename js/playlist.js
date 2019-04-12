@@ -15,8 +15,11 @@ buildPlaylist();
 function fillPlaylist(playlist) {
 
     for (let i = 0; i < limit; i++) {
+
+        // console.log(playlist[i])
+
         if (playlist[i])
-            $("#track" + i).text(playlist[i].artist + " - " + playlist[i].title);
+            $("#track" + i).text(playlist[i].artist.name + " - " + playlist[i].name);
     }
 }
 
@@ -35,7 +38,7 @@ function movePlaylist(forward) {
         bias = 0;
 
     for (let i = 0; i < limit; i++) {
-        $("#track" + i).text(_playlist[i + bias].artist + " - " + _playlist[i + bias].title);
+        $("#track" + i).text(_playlist[i + bias].artist.name + " - " + _playlist[i + bias].name);
     }
 }
 

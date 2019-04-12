@@ -8,7 +8,7 @@ function getYoutubeTrack2(track) {
 
     // console.log('/download link');
 
-    request('https://www.youtube.com/results?search_query=' + track.artist + '+-+' + track.title, function (error, response, body) {
+    request('https://www.youtube.com/results?search_query=' + track.artist.name + '+-+' + track.name, function (error, response, body) {
 
         if (!error && response.statusCode == 200) {
 
@@ -27,7 +27,7 @@ function getYoutubeTrack2(track) {
 
 function downloadMP4(track, link) {
 
-    var name = track.artist + ' - ' + track.title;
+    var name = track.artist.name + ' - ' + track.name;
 
     var video = youtubedl(link,
         // Optional arguments passed to youtube-dl.

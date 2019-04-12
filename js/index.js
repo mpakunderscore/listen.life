@@ -44,8 +44,8 @@ function circle() {
 function playlist() {
 
     setTimeout(function() {
-        // $("#circle-big").addClass("active");
-    }, 400);
+        $("#circle-big").addClass("active");
+    }, 500);
 
     $.get(
         "/playlist",
