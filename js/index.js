@@ -26,7 +26,7 @@ function circle() {
 
         // console.log($("#tag3").text());
 
-        setTimeout(function(){
+        setTimeout(function() {
 
             select($("#tag3").text(), 3);
 
@@ -43,7 +43,9 @@ function circle() {
 
 function playlist() {
 
-    $("#circle-big").addClass("active");
+    setTimeout(function() {
+        // $("#circle-big").addClass("active");
+    }, 400);
 
     $.get(
         "/playlist",
@@ -103,8 +105,6 @@ function setSound() {
         $("#sound").text("OFF");
         player.setVolume(0);
     }
-
-
 }
 
 function setBackground() {

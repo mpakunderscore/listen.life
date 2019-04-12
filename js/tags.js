@@ -6,9 +6,11 @@
 //     {title: 'Pop', select: false},
 //     {title: 'Female vocalists', select: false}];
 
-let tags = [{title: 'Loading', select: false}];
+// let tags = [{title: 'Loading', select: false}];
 
-$.get(
+let tags = []
+
+    $.get(
     "/tags",
     function(data) {
         tags = data;
@@ -59,18 +61,20 @@ function next() {
 
     for (let i = 1; i < tags.length; i++) {
         // console.log(tags[i - 1 + tagIndex])
-        if (tags[i - 1 + tagIndex].title)
-        $('#tag' + i).text(tags[i - 1 + tagIndex].title)
-            // .append($('<div>' + tags[i - 1].title + '</div>')
-                .attr('onclick', 'select("' + tags[i - 1 + tagIndex].title + '", "' + i + '")');
-                // .addClass('tag')
-                // .css('transform', 'rotate(' + (incline + 10 * i) + 'deg)'));
+        if (tags[i - 1 + tagIndex]) {
+            $('#tag' + i).text(tags[i - 1 + tagIndex].title)
+                // .append($('<div>' + tags[i - 1].title + '</div>')
+                    .attr('onclick', 'select("' + tags[i - 1 + tagIndex].title + '", "' + i + '")');
+                    // .addClass('tag')
+                    // .css('transform', 'rotate(' + (incline + 10 * i) + 'deg)'));
 
-        if (tags[i - 1 + tagIndex].select === true)
-            $('#tag' + i).addClass('select')
+            if (tags[i - 1 + tagIndex].select === true)
+                $('#tag' + i).addClass('select')
 
-        else if ($('#tag' + i).hasClass('select'))
-            $('#tag' + i).removeClass('select')
+            else if ($('#tag' + i).hasClass('select'))
+                $('#tag' + i).removeClass('select')
+
+        }
     }
 
     // console.log('tagIndex: ' + (tagIndex + 5) + ", tags: " + tags.length)

@@ -160,7 +160,11 @@ function getTagTopTracks(tagTitle) {
 
     let tag = 'tag=' + tagTitle + '&';
 
-    let res = request('GET', url + getTopTracks_ + tag + key + format);
+    let fullURLString = url + getTopTracks_ + tag + key + format;
+
+    console.log(fullURLString)
+
+    let res = request('GET', fullURLString);
 
     let body = JSON.parse(res.getBody('utf8'));
 
@@ -231,7 +235,11 @@ function getYoutubeTrack(track) {
 
     // console.log('/download link')
 
-    let res = request('GET', 'https://www.youtube.com/results?search_query=' + track.artist + '+-+' + track.title);
+    let fullURLYoutubeTrack = 'https://www.youtube.com/results?search_query=' + track.artist.name + '+-+' + track.name;
+
+    console.log(fullURLYoutubeTrack )
+
+    let res = request('GET', fullURLYoutubeTrack);
 
     let body = res.getBody('utf8');
 

@@ -15,7 +15,8 @@ buildPlaylist();
 function fillPlaylist(playlist) {
 
     for (let i = 0; i < limit; i++) {
-        $("#track" + i).text(playlist[i].artist + " - " + playlist[i].title);
+        if (playlist[i])
+            $("#track" + i).text(playlist[i].artist + " - " + playlist[i].title);
     }
 }
 
