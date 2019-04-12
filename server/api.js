@@ -15,6 +15,10 @@ module.exports = function (app) {
         response.json(database.tags());
     });
 
+    // app.get('/tags/all', function (request, response) {
+    //     response.json(database.tagsAll());
+    // });
+
     app.get('/playlist', function (request, response) {
         response.json(lastfm.playlist(request.query.tags));
     });

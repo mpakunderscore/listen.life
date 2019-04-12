@@ -53,9 +53,11 @@ exports.tracks = function () {
 };
 
 exports.tags = function () {
+    return tags;
+};
 
-    let smallTags = tags.slice(0, 6);
-    return smallTags;
+exports.tagsAll = function () {
+    return tags;
 };
 
 //buildTracks tracks array

@@ -16,11 +16,11 @@ $.get(
     }
 );
 
-var selectedTags = [];
+let selectedTags = [];
 
 
-var tagIndex = 0;
-var incline = -40;
+let tagIndex = 0;
+let incline = -40;
 
 function fillTags() {
 
@@ -32,7 +32,7 @@ function fillTags() {
             .css('transform', 'rotate(' + incline + 'deg)')
             .css('display', 'none'));
 
-    for (var i = 1; i < tags.length; i++) {
+    for (let i = 1; i < 6; i++) {
         $('#tags')
             .append($('<div>' + tags[i - 1].title + '</div>')
                 .attr('onclick', 'select("' + tags[i - 1].title + '", "' + i + '")')
@@ -51,11 +51,15 @@ function fillTags() {
 
 function next() {
 
+    // console.log(tags)
+
     $('#back').css('display', 'block');
 
     tagIndex++;
 
-    for (var i = 1; i < tags.length; i++) {
+    for (let i = 1; i < tags.length; i++) {
+        // console.log(tags[i - 1 + tagIndex])
+        if (tags[i - 1 + tagIndex].title)
         $('#tag' + i).text(tags[i - 1 + tagIndex].title)
             // .append($('<div>' + tags[i - 1].title + '</div>')
                 .attr('onclick', 'select("' + tags[i - 1 + tagIndex].title + '", "' + i + '")');
@@ -86,7 +90,7 @@ function back() {
 
     tagIndex--;
 
-    for (var i = 1; i < 6; i++) {
+    for (let i = 1; i < 6; i++) {
         $('#tag' + i).text(tags[i - 1 + tagIndex].title)
         // .append($('<div>' + tags[i - 1].title + '</div>')
             .attr('onclick', 'select("' + tags[i - 1 + tagIndex].title + '", "' + i + '")');
@@ -112,7 +116,7 @@ function select(tag, id) {
 
     // console.log('select: ' + tag + ", id: " + id)
 
-    for (var i = 0; i < tags.length; i++) {
+    for (let i = 0; i < tags.length; i++) {
         if (tags[i].title === tag) {
 
             if (tags[i].select === true) {
@@ -137,10 +141,10 @@ function select(tag, id) {
 // TODO mouse wheel
 
 
-var position = 0;
-var positionIndex = 0;
+let position = 0;
+let positionIndex = 0;
 
-var positionInterval = 20;
+let positionInterval = 20;
 
 document.addEventListener('mousewheel', function(e) {
 
@@ -177,7 +181,7 @@ document.addEventListener('mousewheel', function(e) {
 // arrays
 
 Array.prototype.remove = function() {
-    var what, a = arguments, L = a.length, ax;
+    let what, a = arguments, L = a.length, ax;
     while (L && this.length) {
         what = a[--L];
         while ((ax = this.indexOf(what)) !== -1) {
@@ -188,7 +192,7 @@ Array.prototype.remove = function() {
 };
 
 Array.prototype.contains = function(obj) {
-    var i = this.length;
+    let i = this.length;
     while (i--) {
         if (this[i] === obj) {
             return true;
@@ -199,7 +203,7 @@ Array.prototype.contains = function(obj) {
 
 
 $(document).keydown(function(event){
-    var key = event.which;
+    let key = event.which;
     switch(key) {
         case 37:
             // Key left.

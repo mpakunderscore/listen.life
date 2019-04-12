@@ -1,8 +1,8 @@
 const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
 
-var req = require('request');
-var request = require('sync-request');
+let req = require('request');
+let request = require('sync-request');
 
 let database = require('./database.js');
 
@@ -80,19 +80,19 @@ module.exports.getTrackTags = function (track) {
     })
 };
 
-var url = 'https://ws.audioscrobbler.com/2.0/?';
+let url = 'https://ws.audioscrobbler.com/2.0/?';
 
-var getTopTags_ = 'method=tag.getTopTags&';
-var getTopTracks_ = 'method=tag.getTopTracks&limit=500&';
-var getTrackTopTags_ = 'method=track.getTopTags&';
+let getTopTags_ = 'method=tag.getTopTags&';
+let getTopTracks_ = 'method=tag.getTopTracks&limit=500&';
+let getTrackTopTags_ = 'method=track.getTopTags&';
 
-var key = 'api_key=d6de1272194e70b5f0f25834eba24155&';
-var format = 'format=json';
+let key = 'api_key=d6de1272194e70b5f0f25834eba24155&';
+let format = 'format=json';
 
 let tags = [];
 let tagTracks = {};
 
-// var playlist = [];
+// let playlist = [];
 
 function getTagsTracks(tags) {
 
@@ -118,11 +118,11 @@ function getTopTags() {
 
         if (!error && response.statusCode == 200) {
 
-            var tagsArray = JSON.parse(body).toptags.tag; // Show the HTML for the Google homepage.
+            let tagsArray = JSON.parse(body).toptags.tag; // Show the HTML for the Google homepage.
 
-            for (var i = 0; i < tagsArray.length; i++) {
+            for (let i = 0; i < tagsArray.length; i++) {
 
-                var title = tagsArray[i].name;
+                let title = tagsArray[i].name;
                 title = title.charAt(0).toUpperCase() + title.slice(1);
 
                 tags.push({title: title, select: false})
@@ -150,7 +150,7 @@ function getTracks() {
     // playlist = [];
     // $('#playlist').text('');
 
-    for (var i = 0; i < selectedTags.length; i++) {
+    for (let i = 0; i < selectedTags.length; i++) {
 
         getTagTopTracks(selectedTags[i])
     }
@@ -158,20 +158,20 @@ function getTracks() {
 
 function getTagTopTracks(tagTitle) {
 
-    var tag = 'tag=' + tagTitle + '&';
+    let tag = 'tag=' + tagTitle + '&';
 
     let res = request('GET', url + getTopTracks_ + tag + key + format);
 
     let body = JSON.parse(res.getBody('utf8'));
 
-    var tracksArray = shuffle(body.tracks.track);
+    let tracksArray = shuffle(body.tracks.track);
 
     tagTracks[tagTitle] = [];
 
-    for (var i = 0; i < tracksArray.length; i++) {
+    for (let i = 0; i < tracksArray.length; i++) {
 
-        var title = tracksArray[i].name;
-        var artist = tracksArray[i].artist.name;
+        let title = tracksArray[i].name;
+        let artist = tracksArray[i].artist.name;
 
         tagTracks[tagTitle].push({artist: artist, title: title});
 
@@ -183,8 +183,8 @@ function getTagTopTracks(tagTitle) {
 
 function getTags(artist, track) {
 
-    var artistTitle = artist;
-    var trackTrack = track;
+    let artistTitle = artist;
+    let trackTrack = track;
 
     // console.log('getTags: ' + artist + ' - ' + track)
 
@@ -193,7 +193,7 @@ function getTags(artist, track) {
 
     request(url + getTrackTopTags_ + artist + track + key + format, function (error, response, body) {
 
-        var trackTags = [];
+        let trackTags = [];
 
         if (!error && response.statusCode == 200) {
 
@@ -204,12 +204,12 @@ function getTags(artist, track) {
                 return;
             }
 
-            var tagsArray = JSON.parse(body).toptags.tag; // Show the HTML for the Google homepage.
+            let tagsArray = JSON.parse(body).toptags.tag; // Show the HTML for the Google homepage.
 
-            for (var i = 0; i < tagsArray.length; i++) {
+            for (let i = 0; i < tagsArray.length; i++) {
 
-                var title = tagsArray[i].name;
-                var count = tagsArray[i].count;
+                let title = tagsArray[i].name;
+                let count = tagsArray[i].count;
 
                 console.log(title + ' - ' + count);
 
@@ -231,7 +231,7 @@ function getYoutubeTrack(track) {
 
     // console.log('/download link')
 
-    var res = request('GET', 'https://www.youtube.com/results?search_query=' + track.artist + '+-+' + track.title);
+    let res = request('GET', 'https://www.youtube.com/results?search_query=' + track.artist + '+-+' + track.title);
 
     let body = res.getBody('utf8');
 
@@ -250,7 +250,7 @@ function getYoutubeTrack(track) {
 
     console.log(href);
 
-    // var href = $.find('#results').find('.item-section').find('a')[0].href;
+    // let href = $.find('#results').find('.item-section').find('a')[0].href;
 
     return href.split("=")[1];
 }
@@ -263,7 +263,7 @@ function getYoutubeTrack2(track) {
 
         if (!error && response.statusCode == 200) {
 
-            var href = $(body).find('#results').find('.item-section').find('a')[0].href;
+            let href = $(body).find('#results').find('.item-section').find('a')[0].href;
 
             // console.log(href);
 
@@ -278,7 +278,7 @@ function getYoutubeTrack2(track) {
 
 function shuffle(array) {
 
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
