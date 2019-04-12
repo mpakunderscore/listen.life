@@ -235,11 +235,14 @@ function getYoutubeTrack(track) {
 
     // console.log('/download link')
 
+    if (!track)
+        return '';
+
     let fullURLYoutubeTrack = 'https://www.youtube.com/results?search_query=' + track.artist.name + '+-+' + track.name;
 
     console.log(fullURLYoutubeTrack )
 
-    let res = request('GET', fullURLYoutubeTrack);
+    let res = request('GET', encodeURI(fullURLYoutubeTrack));
 
     let body = res.getBody('utf8');
 

@@ -49,6 +49,7 @@ function playlist() {
 
     $.get(
         "/playlist",
+        // encodeURIComponent
         {tags: selectedTags},
         function (playlist) {
 
